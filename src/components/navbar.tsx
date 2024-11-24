@@ -1,7 +1,6 @@
 "use client";
 
 import React from "react";
-import { ModeToggle } from "@/components/theme-button";
 
 interface Type {
   name: string;
@@ -9,7 +8,11 @@ interface Type {
   hoverColor: string;
 }
 
-const Navbar: React.FC = () => {
+interface NavbarProps {
+  onTypeSelect: (type: string) => void;
+}
+
+const Navbar: React.FC<NavbarProps> = ({ onTypeSelect }) => {
   const types: Type[] = [
     {
       name: "VER TODOS",
@@ -61,26 +64,25 @@ const Navbar: React.FC = () => {
   ];
 
   return (
-    <div className="bg-inherit py-4">
+    <div className="bg-inherit shadow-md py-4 border-blue-700">
       <div className="container mx-auto flex items-center justify-between">
-        {/* Logo */}
-        <img src="/pokedex.png" alt="Pokedex" className="h-12" />
-
-        {/* Buttons */}
+        <img
+          src="/pokedex.png"
+          alt="Pokedex"
+          className="h-12 transition-all duration-200 hover:scale-105"
+        />
         <div className="flex flex-wrap gap-4 justify-center">
           {types.map((type) => (
             <button
               key={type.name}
-              className={`px-4 py-2 text-white rounded-full transition-all duration-200 ${type.color} ${type.hoverColor}`}
+              className={`px-4 py-2 text-white rounded-full shadow-md transition-all duration-200 hover:scale-105 hover:shadow-lg ${type.color} ${type.hoverColor}`}
+              onClick={() =>
+                onTypeSelect(type.name === "VER TODOS" ? "" : type.name)
+              }
             >
               {type.name}
             </button>
           ))}
-        </div>
-
-        {/* Theme Toggle */}
-        <div className="ml-auto">
-          <ModeToggle />
         </div>
       </div>
     </div>
