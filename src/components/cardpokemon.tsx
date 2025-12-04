@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
+import Image from "next/image";
 import { Ruler, Weight } from "lucide-react";
 
 type PokemonCardProps = {
@@ -154,13 +155,16 @@ export default function PokemonCard({ id, cache }: PokemonCardProps) {
               <div className="w-24 h-24 bg-gray-200 dark:bg-gray-700 rounded-full animate-pulse"></div>
             </div>
           )}
-          <img
+          <Image
             src={pokemon.image}
-            alt={pokemon.name}
+            alt={`${pokemon.name} - Pokémon #${id}`}
+            width={160}
+            height={160}
             className={`w-32 h-32 md:w-40 md:h-40 object-contain transform transition-all duration-300 group-hover:scale-110 drop-shadow-2xl ${
               imageLoaded ? "opacity-100" : "opacity-0"
             }`}
             onLoad={() => setImageLoaded(true)}
+            unoptimized
           />
         </div>
 

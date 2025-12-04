@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
+
 import { ModeToggle } from "./theme-button";
 import { Menu, X } from "lucide-react";
 
@@ -79,28 +80,23 @@ const Navbar: React.FC<NavbarProps> = ({ onTypeSelect, selectedType }) => {
     <nav className="sticky top-0 z-50 bg-white/80 dark:bg-gray-900/80 backdrop-blur-lg shadow-lg border-b border-gray-200 dark:border-gray-700">
       <div className="container mx-auto px-4 py-4">
         <div className="flex items-center justify-between">
-          {/* Logo */}
-          <div className="flex items-center gap-4">
-            <img
-              src="/pokedex.png"
-              alt="Pokedex"
-              className="h-10 md:h-12 transition-all duration-200 hover:scale-110 cursor-pointer"
-              onClick={() => onTypeSelect("")}
-            />
+          {/* Logo y Título */}
+          <div
+            className="flex items-center gap-3 cursor-pointer group"
+            onClick={() => onTypeSelect("")}
+          >
+            <h1 className="text-xl md:text-2xl lg:text-3xl font-black bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent">
+              Pokédex
+            </h1>
           </div>
 
-          {/* Desktop: Toggle de tema */}
-          <div className="hidden lg:flex items-center gap-2">
-            <ModeToggle />
-          </div>
-
-          {/* Mobile: Botón menú */}
-          <div className="lg:hidden flex items-center gap-2">
+          {/* Toggle de tema y menú */}
+          <div className="flex items-center gap-2">
             <ModeToggle />
             <button
               onClick={() => setIsMenuOpen(!isMenuOpen)}
-              className="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
-              aria-label="Toggle menu"
+              className="lg:hidden p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
+              aria-label={isMenuOpen ? "Cerrar menú" : "Abrir menú"}
             >
               {isMenuOpen ? (
                 <X className="h-6 w-6 text-gray-700 dark:text-gray-300" />

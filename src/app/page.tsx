@@ -4,8 +4,17 @@ import React, { useEffect, useState, useMemo } from "react";
 import Navbar from "@/components/navbar";
 import PokemonCard from "@/components/cardpokemon";
 
+// Tipos para los datos de Pokémon
+interface PokemonData {
+  name: string;
+  image: string;
+  types: string[];
+  height: string;
+  weight: string;
+}
+
 // Cache para almacenar datos de Pokémon
-const pokemonCache = new Map<number, any>();
+const pokemonCache = new Map<number, PokemonData>();
 const typeCache = new Map<string, number[]>();
 
 function SkeletonCard() {
@@ -84,7 +93,7 @@ export default function Home() {
 
         // Filtrar solo los Pokémon de la primera generación (1-151)
         const typeIds = data.pokemon
-          .map((p: any) => {
+          .map((p: { pokemon: { url: string } }) => {
             const url = p.pokemon.url;
             const id = parseInt(url.split("/").slice(-2, -1)[0]);
             return id;
@@ -134,10 +143,10 @@ export default function Home() {
       <div className="container mx-auto px-4 py-8">
         {/* Header de sección */}
         <div className="mb-8 text-center">
-          <h1 className="text-4xl md:text-5xl font-bold text-gray-800 dark:text-white mb-2">
+          <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent mb-3 drop-shadow-sm">
             {displayText}
           </h1>
-          <p className="text-lg text-gray-600 dark:text-gray-400">
+          <p className="text-lg md:text-xl text-gray-600 dark:text-gray-400 font-medium">
             {filtering
               ? "Filtrando..."
               : `${filteredIds.length} Pokémon encontrados`}
